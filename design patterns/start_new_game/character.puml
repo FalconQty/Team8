@@ -1,0 +1,56 @@
+@startuml
+
+title User Story: As a player, I want my character(s) to be initialized with stats, inventory, and abilities,\nso that I can play with a defined setup.
+
+package "Model" {
+  class Game {
+    + start_new_game(num_players : int)
+  }
+  note right : Facade
+
+  class Char_Builder{
+    character : Character
+    setName(character)
+    makeInventory(character)
+    setAbilities(character)
+    setStats(character)
+  }
+  note right : Builder
+
+  class Character {
+    - name : string
+    - current_hp : int
+    - max_hp : int
+    - attack : int
+    - defense : int
+    - magic : int
+    - resistance : int
+    - speed : int
+    - inventory : Inventory
+    - abilities : List<Ability>
+  }
+
+  class Inventory {
+    - max_capacity : int
+    - number_of_items : int
+    - items : List<Item>
+  }
+
+  class Item{
+    - name : string
+    - description : string
+  }
+
+  class Ability {
+    - name : string
+    - description : string
+  }
+}
+
+Game --> Char_Builder : " instantiates the character(s)"
+Char_Builder --> Character
+Char_Builder --> Inventory : " instantiates the player(s) inventory"
+Char_Builder --> Ability : " this is currently just a reference. \nabilities will be better defined in another user story"
+Inventory --> Item : " this is currently just a reference. \nitems will be better defined in another user story"
+Game ..> Character
+@enduml
