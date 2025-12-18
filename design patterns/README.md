@@ -1,0 +1,1 @@
+Le cartelle rappresentano epiche, per le quali è presente un diagramma per ognuna delle singole user story che compongono l'epica. I diagrammi che non fanno parte di alcuna epica sono lasciati nella root della cartella.
