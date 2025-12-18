@@ -4,7 +4,7 @@ title User Story: As a player, I want my character(s) to be initialized with sta
 
 package "Model" {
   class Game {
-    + start_new_game(num_players : int)
+    start_new_game(num_players : int)
   }
   note right : Facade
 
@@ -18,32 +18,32 @@ package "Model" {
   note right : Builder
 
   class Character {
-    - name : string
-    - current_hp : int
-    - max_hp : int
-    - attack : int
-    - defense : int
-    - magic : int
-    - resistance : int
-    - speed : int
-    - inventory : Inventory
-    - abilities : List<Ability>
+    name : string
+    current_hp : int
+    max_hp : int
+    attack : int
+    defense : int
+    magic : int
+    resistance : int
+    speed : int
+    inventory : Inventory
+    abilities : List<Ability>
   }
 
   class Inventory {
-    - max_capacity : int
-    - number_of_items : int
-    - items : List<Item>
+    max_capacity : int
+    number_of_items : int
+    items : List<Item>
   }
 
   class Item{
-    - name : string
-    - description : string
+    name : string
+    description : string
   }
 
   class Ability {
-    - name : string
-    - description : string
+    name : string
+    description : string
   }
 }
 

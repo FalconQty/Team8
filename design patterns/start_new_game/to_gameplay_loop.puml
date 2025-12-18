@@ -3,21 +3,21 @@ title User Story: As a player, I want the game to enter the gameplay loop after 
 
 package "Model" {
   class Game {
-    - gamestate : GameState
-    - gameloop : GameLoop
-    + start_new_game(num_players : int)
+    gamestate : GameState
+    gameloop : GameLoop
+    start_new_game(num_players : int)
   }
   note right : Facade
 
   class GameLoop {
-    - mainloop()
+    mainloop()
   }
 
   class GameState {
-    - is_running : bool
-    - current_level : int
-    - current_room : int
-    - players : List<Character>
+    is_running : bool
+    current_level : int
+    current_room : int
+    players : List<Character>
   }
 }
 

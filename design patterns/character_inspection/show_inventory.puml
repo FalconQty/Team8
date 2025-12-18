@@ -1,0 +1,54 @@
+@startuml
+title User Story: As a player, I want to see my inventory,\nso that I know which items I have.
+
+package "View" {
+    class GameplayMenu {
+        controller : GameController
+        inventory_button_press(player_index : int)
+    }
+
+    class InventoryMenu {
+        display_player_inventory(items : dict, items_count : int, max_capacity : int)
+    }
+}
+
+package "Controller" {
+    class GameController {
+        game : Game
+        get_player_inventory(player_index : int)
+        show_player_inventory(player_index : int)
+    }
+}
+
+package "Model" {
+
+    class Game{
+        get_player_inventory(player_index : int)
+    }
+    note right : Facade
+
+    class Character {
+        inventory : Inventory
+        get_inventory_in_view_format()
+    }
+
+    class Inventory {
+        max_capacity : int
+        number_of_items : int
+        items : List<Item>
+        to_view_format() : dict
+    }
+
+    class Item {
+        name : string
+        description : string
+    }
+}
+
+GameplayMenu --> GameController : " player requests inventory view"
+GameController --> Game: " gets character's inventory data"
+Game --> Character : " facade gets inventory in view format for the controller"
+GameController --> InventoryMenu : " send inventory in view format to be shown"
+Inventory --> Item : " this is just a reference currently. \nitems will be better defined in another user story"
+Character --> Inventory
+@enduml
