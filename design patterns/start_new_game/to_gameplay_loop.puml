@@ -1,0 +1,26 @@
+@startuml
+title User Story: As a player, I want the game to enter the gameplay loop after starting\n so that I can interact with the game world.
+
+package "Model" {
+  class Game {
+    - gamestate : GameState
+    - gameloop : GameLoop
+    + start_new_game(num_players : int)
+  }
+  note right : Facade
+
+  class GameLoop {
+    - mainloop()
+  }
+
+  class GameState {
+    - is_running : bool
+    - current_level : int
+    - current_room : int
+    - players : List<Character>
+  }
+}
+
+Game --> GameLoop : "Starts the main gameloop once the game has been initiated"
+Game --> GameState : "Puts in the memory the collected data for the new game"
+@enduml
