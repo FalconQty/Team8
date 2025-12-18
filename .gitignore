@@ -1,0 +1,3 @@
+#Ignora tutte le cartelle __pycache__ e i loro contenuti
+
+__pycache__/
