@@ -8,7 +8,7 @@ package "View" {
     }
 
     class InventoryMenu {
-        display_player_inventory(items : dict, items_count : int, max_capacity : int)
+        display_player_inventory(items : List<dict>, items_count : int, max_capacity : int)
     }
 }
 
@@ -36,7 +36,7 @@ package "Model" {
         max_capacity : int
         number_of_items : int
         items : List<Item>
-        to_view_format() : dict
+        to_view_format() : List<dict>
     }
 
     class Item {

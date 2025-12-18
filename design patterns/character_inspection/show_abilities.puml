@@ -1,0 +1,45 @@
+@startuml
+title User Story: As a player, I want to see my abilities,\nso that I may inspect what they do.
+
+package "View" {
+  class GameplayMenu {
+    controller : GameController
+    abilities_button_press()
+  }
+
+  class AbilitiesMenu {
+    display_player_abilities(abilities : List<dict>)
+  }
+}
+
+package "Controller" {
+  class GameController {
+    game : Game
+    get_player_abilities(player_index : int)
+    show_player_abilities(player_index : int)
+  }
+}
+
+package "Model" {
+    class Game{
+        get_player_abilities(player_index : int)
+    }
+    note right : Facade
+
+    class Character {
+        abilities : List<Ability>
+        get_abilities_in_view_format() : List<dict>
+    }
+
+    class Ability {
+        name : string
+        description : string
+    }
+}
+
+GameplayMenu --> GameController : "player requests abilities view"
+GameController --> Game : " gets characters's abilities data"
+Game --> Character : " facade gets abilities data in view format for the controller"
+Character --> Ability : " this is just a reference currently\nabilities will be better defined in another user story"
+GameController --> AbilitiesMenu : " send abilities in view format to be shown"
+@enduml
