@@ -1,0 +1,28 @@
+@startuml
+title User Story: As a player, I want to start a new game \n(singleplayer or multiplayer), so that I can begin playing from scratch.
+
+package "View" {
+  class MainMenu {
+    - controller : Controller
+    + singleplayer_new_game_button_press()
+    + multiplayer_new_game_button_press()
+  }
+}
+
+package "Controller" {
+  class GameController {
+    + start_new_game(num_players : int)
+    - game : Game
+  }
+}
+
+package "Model" {
+  class Game {
+    + start_new_game(num_players : int)
+  }
+  note right : Facade
+}
+
+MainMenu --> GameController : " allow the player to send requests to the controller"
+GameController --> Game : " Calls the model accordingly to player's request"
+@enduml
