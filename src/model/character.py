@@ -11,6 +11,21 @@ class Character:
         self.inventory = None
         self.abilities = None
 
+    def get_inventory_in_view_format(self):
+        capacity = self.inventory.max_capacity
+        count = self.inventory.number_of_items
+        items = self.inventory.to_view_format()
+        return items, capacity, count
+    
+    def get_abilities_in_view_format(self):
+        view_format = []
+        for item in self.abilities:
+            itemdict = dict()
+            itemdict["name"] = item.name
+            itemdict["description"] = item.description
+            view_format.append(itemdict)
+        return view_format
+
 class Char_Builder:
     def build_character(self):
         character = Character()
@@ -63,7 +78,30 @@ class Inventory:
         self.number_of_items = 0
         self.items = []
 
+    def to_view_format(self):
+        "verrà perfezionato con la user story sugli item"
+        view_format = []
+        for item in self.items:
+            itemdict = dict()
+            itemdict["name"] = item.name
+            itemdict["description"] = item.description
+            view_format.append(itemdict)
+        return view_format
+    
+    def add_item(self, name, description):
+        """fodder.  cambierà quando gli item saranno ben definiti"""
+        to_add = Item()
+        to_add.name = name
+        to_add.description = description
+        self.number_of_items += 1
+        self.items.append(to_add)
+
 class Ability:
+    def __init__(self):
+        self.name = ""
+        self.description = ""
+
+class Item:
     def __init__(self):
         self.name = ""
         self.description = ""

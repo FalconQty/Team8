@@ -13,6 +13,14 @@ class Game: #facade
         self.gamestate.current_room = 1
         self.gamestate.players = [Char_Builder().build_character() for i in range(0, num_players)]
         return self.gameloop.mainloop()
+    
+    def get_player_inventory(self, player_index):
+        items, capacity, count = self.gamestate.players[player_index].get_inventory_in_view_format()
+        return items, capacity, count
+    
+    def get_player_abilities(self, player_index):
+        abilities = self.gamestate.players[player_index].get_abilities_in_view_format()
+        return abilities
 
 
 class GameLoop:
