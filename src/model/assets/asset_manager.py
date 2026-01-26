@@ -1,26 +1,38 @@
 """
 FILE: ./src/model/assets/asset_manager.py
 Asset Manager - Centralized handling for graphic resources.
-Updated: Added color for player2.
+Updated: Compatible with PyInstaller exe.
 """
 import os
+import sys
 import pygame
 import logging
 
 logger = logging.getLogger(__name__)
 
+
+def resource_path(relative_path):
+    """
+    Ottiene il percorso corretto sia in sviluppo che nell'exe.
+    """
+    if hasattr(sys, '_MEIPASS'):
+        # Eseguito come .exe (PyInstaller)
+        return os.path.join(sys._MEIPASS, relative_path)
+    # Eseguito come script normale
+    return os.path.join(os.path.abspath("."), relative_path)
+
+
 class AssetManager:
     def __init__(self, asset_dir_name: str = "assets"):
-        current_file_path = os.path.abspath(__file__)
-        project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(current_file_path))))
+        # NUOVO: Usa resource_path invece del calcolo manuale
+        self.asset_dir = resource_path(asset_dir_name)
         
-        self.asset_dir = os.path.join(project_root, asset_dir_name)
         self.images: dict[str, pygame.Surface] = {}
         self.fonts: dict[str, pygame.font.Font] = {}
         
         self.color_map = {
             "player": (0, 255, 0),    # Verde (Turiddu/P1)
-            "player2": (0, 255, 255), # Ciano (Rosalia/P2) <--- NUOVO
+            "player2": (0, 255, 255), # Ciano (Rosalia/P2)
             "npc": (0, 0, 255),
             "enemy": (255, 0, 0),
             "item": (255, 255, 0),
@@ -72,8 +84,6 @@ class AssetManager:
                     except Exception as e:
                         logger.warning(f"Error loading image at {full_path}: {e}")
 
-        # Fallback se l'immagine non viene trovata
-        # logger.warning(f"Asset not found: {key} in {self.asset_dir}. Using placeholder.")
         return self._create_placeholder(cache_key, width, height, fallback_type)
 
     def _create_placeholder(self, cache_key: str, w: int, h: int, entity_type: str) -> pygame.Surface:
