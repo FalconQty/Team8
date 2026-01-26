@@ -1861,3 +1861,12 @@
 2026-01-26 05:25:04,237 WARNING game - Missing BGM track: track_id=intro.ogg resolved_path=assets/audio/bgm/intro.ogg context=None
 2026-01-26 05:26:13,507 INFO game - World content loaded successfully.
 2026-01-26 05:26:13,507 WARNING game - Missing BGM track: track_id=intro.ogg resolved_path=assets/audio/bgm/intro.ogg context=None
+2026-01-26 09:11:46,819 INFO game - World content loaded successfully.
+2026-01-26 09:11:46,820 WARNING game - Missing BGM track: track_id=intro.ogg resolved_path=assets/audio/bgm/intro.ogg context=None
+2026-01-26 09:11:50,795 WARNING game - Missing BGM track: track_id=hub.ogg resolved_path=assets/audio/bgm/hub.ogg context={'scene': 'hub'}
+2026-01-26 09:11:50,797 WARNING game - Missing BGM track: track_id=intro_theme.ogg resolved_path=assets/audio/bgm/intro_theme.ogg context=None
+2026-01-26 09:14:21,837 WARNING game - Missing BGM track: track_id=intro.ogg resolved_path=assets/audio/bgm/intro.ogg context=None
+2026-01-26 10:41:56,026 INFO game - World content loaded successfully.
+2026-01-26 10:41:56,027 WARNING game - Missing BGM track: track_id=intro.ogg resolved_path=assets/audio/bgm/intro.ogg context=None
+2026-01-26 10:41:59,147 WARNING game - Missing BGM track: track_id=hub.ogg resolved_path=assets/audio/bgm/hub.ogg context={'scene': 'hub'}
+2026-01-26 10:41:59,151 WARNING game - Missing BGM track: track_id=intro_theme.ogg resolved_path=assets/audio/bgm/intro_theme.ogg context=None

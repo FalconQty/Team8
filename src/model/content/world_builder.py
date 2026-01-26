@@ -191,15 +191,15 @@ class WorldBuilder:
 
         # --- Colliders (Muri) ---
         hub.colliders = [
-            Collider("confine_superiore", pygame.Rect(0, 0, 800, 5)),
+            Collider("confine_superiore", pygame.Rect(0, 0, 800, 80)),
             Collider("muro_botti", pygame.Rect(80+60, 0, 60, 205+75)),
-            Collider("confine_destro", pygame.Rect(795, 0, 5, 600)),
+            Collider("confine_destro", pygame.Rect(795, 0, 30, 600)),
             Collider("confine_inferiore", pygame.Rect(0, 595, 800, 5)),
             Collider("wall_top_L", pygame.Rect(0, 0, 370, 170)),
             Collider("wall_top_R", pygame.Rect(430, 0, 380, 170)),
             Collider("wall_bottom_L", pygame.Rect(0, 490, 340, 110)),
             Collider("wall_bottom_R", pygame.Rect(460, 490, 340, 110)),
-            Collider("wall_left_U", pygame.Rect(0, 0, 205, 210)),
+            Collider("wall_left_U", pygame.Rect(0, 0, 205, 230)),
             Collider("wall_left_D", pygame.Rect(0, 210, 80, 390)),
             Collider("wall_right_U", pygame.Rect(590, 0, 210, 270)),
             Collider("wall_right_D", pygame.Rect(590, 345, 210, 255)),
@@ -209,7 +209,7 @@ class WorldBuilder:
         hub.triggers.append(TriggerZone(id="gate_aurion", rect=pygame.Rect(380, 80, 40, 40), trigger_type="script", script_id="interact_gate_aurion", requires_confirm=False, label="Verso Aurion"))
         hub.triggers.append(TriggerZone(id="gate_ferrum", rect=pygame.Rect(340, 500, 120, 100), trigger_type="script", script_id="interact_gate_ferrum", requires_confirm=False, label="Verso Ferrum"))
         hub.triggers.append(TriggerZone(id="gate_vinalia", rect=pygame.Rect(80, 210, 60, 60), trigger_type="script", script_id="interact_gate_vinalia", requires_confirm=False, label="Verso Vinalia"))
-        hub.triggers.append(TriggerZone(id="gate_viridor", rect=pygame.Rect(750, 250, 50, 100), trigger_type="script", script_id="interact_gate_viridor", requires_confirm=False, label="Verso Viridor"))
+        hub.triggers.append(TriggerZone(id="gate_viridor", rect=pygame.Rect(710, 250, 50, 100), trigger_type="script", script_id="interact_gate_viridor", requires_confirm=False, label="Verso Viridor"))
         
         # --- FIX: RIMOSSO TRIGGER INVISIBILE SOVRAPPOSTO AL CENTRO ---
         # L'accesso all'Etna ora avviene SOLO tramite il Carretto.
