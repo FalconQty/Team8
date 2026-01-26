@@ -1,9 +1,9 @@
 """
-Visual demo with pygame window.
+Visual demo with pygame window for testing basic functions
 """
 
 import pygame
-from src.model.render_system import Renderer, Camera, RenderLayer
+from src.model.render_system import Renderer, Camera
 from src.model.room_data import RoomData
 from src.view.room_view import RoomView
 
