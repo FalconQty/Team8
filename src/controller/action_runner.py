@@ -193,9 +193,7 @@ class ActionRunner:
         return self._choice_result
     
     def _handle_set_checkpoint(self, params):
-        room_id = params.get('checkpoint_id') # In realtà params contiene ID stanza/spawn? 
-        # L'azione SET_CHECKPOINT params={'checkpoint_id': 'room_id'} è un po' ambigua.
-        # Meglio: params={'room_id': ..., 'spawn_id': ...} o usa posizione corrente.
+        room_id = params.get('checkpoint_id')
        
         # Se params è vuoto, usa posizione corrente
         self.game.gamestate.set_checkpoint()
