@@ -24,3 +24,6 @@ logs/
 # IDE settings (opzionale ma consigliato)
 .vscode/
 .idea/
+
+# Pytest Cache
+.pytest_cache/
