@@ -1,7 +1,6 @@
 """
-Sicily: Chronicles of the Four Aces
+Sikula: L'ultimo brindisi
 Main Entry Point - The Game Loop
-Updated: Added Rendering support for CUTSCENE state.
 """
 import sys
 import os
@@ -76,7 +75,7 @@ def main():
             boss_state = sm._get_state(StateID.BOSS_OSTE)
             boss_state.render(screen)
 
-        # --- CUTSCENE (INTRO/OUTRO) --- <--- AGGIUNTO QUI
+        # --- CUTSCENE (INTRO/OUTRO) --- 
         elif sm.has_state(StateID.CUTSCENE):
             cutscene_state = sm._get_state(StateID.CUTSCENE)
             # La cutscene si disegna da sola direttamente sulla surface
