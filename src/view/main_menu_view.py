@@ -45,11 +45,11 @@ class MainMenuView:
                 screen.blit(shadow, (x + 3, y + 3))
                 screen.blit(main, (x, y))
 
-            t_surf = self.title_font.render("SICILY", True, (255, 200, 0))
-            draw_text_with_shadow("SICILY", self.title_font, (255, 200, 0), center_x - t_surf.get_width()//2, 80)
+            t_surf = self.title_font.render("SIKULA", True, (255, 200, 0))
+            draw_text_with_shadow("SIKULA", self.title_font, (255, 200, 0), center_x - t_surf.get_width()//2, 80)
             
-            st_surf = UIStyle._font_main.render("Chronicles of the Four Aces", True, (200, 200, 200))
-            draw_text_with_shadow("Chronicles of the Four Aces", UIStyle._font_main, (200, 200, 200), center_x - st_surf.get_width()//2, 150)
+            st_surf = UIStyle._font_main.render("L'ultimo brindisi", True, (200, 200, 200))
+            draw_text_with_shadow("L'ultimo brindisi", UIStyle._font_main, (200, 200, 200), center_x - st_surf.get_width()//2, 150)
 
             # 3. Contenuto del Menu
             if menu_state.sub_menu == "root":
