@@ -35,9 +35,7 @@ class RenderController:
         self.combat_view = CombatView(self.renderer)
         self.inventory_view = InventoryView(self.renderer)
         
-        # --- MODIFICA QUI: Passo asset_manager al menu ---
         self.main_menu_view = MainMenuView(self.renderer, self.asset_manager)
-        # -------------------------------------------------
         
         self.pause_view = PauseView(self.renderer)
         self.game_over_view = GameOverView(self.renderer)
