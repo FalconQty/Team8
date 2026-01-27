@@ -9,7 +9,27 @@ Progetto sviluppato per il corso di **Ingegneria del Software** con focus su arc
  “Un brindisi, un liquido viola, e la Sicilia reale si dissolve in una dimensione onirica.”
 
 #### Come giocare
-Si può avviare facilmente il gioco tramite il file Sikula.exe (su windows), altrimenti bisogna scaricare pygame ed eseguire il file src/main.py
+Bisogna scaricare pygame ed eseguire il file src/main.py
+
+#### Struttura della repository
+La struttura scelta per le cartelle e i file della repository nei branch è la seguente:
+```
+root/
+|
+|--- design patterns/ #cartella che contiene le architetture delle componenti di gioco (in plantUML)
+|
+|--- assets/ #cartella che contiene tutti gli asset di gioco
+|
+|--- src/ #cartella che contiene i file dei metodi del gioco (codice sorgente)
+|
+|--- tests/ #cartella che contiene i test (test cases e test suites)
+|
+|--- logs/ #cartella che contiene il game log
+|
+|--- README.md #file readme
+|
+|--- .gitignore #file che indica cartelle (e file) da ignorare nei push alla repository remota
+```
 
 #### Panoramica
 **SIKULA - L’Ultimo Brindisi** racconta la storia di **Turiddu** e **Rosalia** che, durante una sagra di paese, incontrano il venditore ambulante **U Strammu** e assaggiano “**U Spiritu du Fikudinnia**”.  
