@@ -1,0 +1,91 @@
+name: Build SIKULA Executables
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Versione della release (es: v1.0.0)"
+        required: true
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        include:
+          - os: ubuntu-latest
+            asset_path: "./assets:assets"
+            exe_name: "sikula-linux"
+          - os: windows-latest
+            asset_path: "./assets;assets"
+            exe_name: "sikula-windows.exe"
+          - os: macos-latest
+            asset_path: "./assets:assets"
+            exe_name: "sikula-macos"
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Controlla repository
+        uses: actions/checkout@v4
+
+      - name: Imposta Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.x"
+
+      - name: Installa dipendenze
+        run: |
+          pip install pygame
+          pip install pyinstaller
+
+      - name: Costruisci eseguibile
+        shell: pwsh
+        run: |
+          pyinstaller --onefile --noconsole `
+            --add-data "${{ matrix.asset_path }}" `
+            --name "sikula" `
+            src/main.py
+
+      - name: Rinomina eseguibile
+        shell: bash
+        run: |
+          if [[ "${{ matrix.os }}" == "windows-latest" ]]; then
+            mv dist/sikula.exe dist/${{ matrix.exe_name }}
+          else
+            mv dist/sikula dist/${{ matrix.exe_name }}
+          fi
+
+      - name: Carica gli artefatti
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.exe_name }}
+          path: dist/${{ matrix.exe_name }}
+          retention-days: 1
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Scarica tutti gli artefatti
+        uses: actions/download-artifact@v4
+        with:
+          merge-multiple: true
+          path: release-files/
+
+      - name: Crea file binari eseguibili per MACOS e Linux
+        run: |
+          chmod +x release-files/sikula-linux
+          chmod +x release-files/sikula-macos
+
+      - name: Crea Release Github
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.event.inputs.version }}
+          name: "SIKULA - Release ${{ github.event.inputs.version }}"
+          draft: false
+          prerelease: false
+          files: |
+            release-files/sikula-linux
+            release-files/sikula-windows.exe
+            release-files/sikula-macos
