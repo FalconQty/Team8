@@ -11,17 +11,18 @@ jobs:
   build:
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
         include:
           - os: ubuntu-latest
-            asset_path: "./assets:assets"
             exe_name: "sikula-linux"
-          - os: windows-latest
-            asset_path: "./assets;assets"
-            exe_name: "sikula-windows.exe"
-          - os: macos-latest
             asset_path: "./assets:assets"
+            
+          - os: windows-latest
+            exe_name: "sikula-windows.exe"
+            asset_path: "./assets;assets"
+            
+          - os: macos-latest
             exe_name: "sikula-macos"
+            asset_path: "./assets:assets"
 
     runs-on: ${{ matrix.os }}
 
@@ -29,13 +30,29 @@ jobs:
       - name: Controlla repository
         uses: actions/checkout@v4
 
-      - name: Imposta Python
+      - name: Imposta Python 3.11
         uses: actions/setup-python@v4
         with:
-          python-version: "3.x"
+          python-version: "3.11.9"
 
-      - name: Installa dipendenze
+      # INSTALLA DIPENDENZE DI SISTEMA
+      - name: Installa dipendenze di sistema (Linux)
+        if: runner.os == 'Linux'
         run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev \
+            libfreetype6-dev libportmidi-dev libjpeg-dev libpng-dev \
+            python3-dev build-essential
+
+      - name: Installa dipendenze di sistema (macOS)
+        if: runner.os == 'macOS'
+        run: |
+          brew install sdl2 sdl2_image sdl2_mixer sdl2_ttf
+
+      - name: Installa dipendenze Python
+        run: |
+          pip install --upgrade pip
           pip install -r requirements.txt
           pip install pyinstaller
 
@@ -44,17 +61,8 @@ jobs:
         run: |
           pyinstaller --onefile --noconsole `
             --add-data "${{ matrix.asset_path }}" `
-            --name "sikula" `
+            --name "${{ matrix.exe_name }}" `
             src/main.py
-
-      - name: Rinomina eseguibile
-        shell: bash
-        run: |
-          if [[ "${{ matrix.os }}" == "windows-latest" ]]; then
-            mv dist/sikula.exe dist/${{ matrix.exe_name }}
-          else
-            mv dist/sikula dist/${{ matrix.exe_name }}
-          fi
 
       - name: Carica gli artefatti
         uses: actions/upload-artifact@v4
@@ -73,7 +81,7 @@ jobs:
           merge-multiple: true
           path: release-files/
 
-      - name: Crea file binari eseguibili per MACOS e Linux
+      - name: Rendi eseguibili Linux e macOS
         run: |
           chmod +x release-files/sikula-linux
           chmod +x release-files/sikula-macos
