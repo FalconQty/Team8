@@ -36,7 +36,7 @@ jobs:
 
       - name: Installa dipendenze
         run: |
-          pip install pygame
+          pip install -r requirements.txt
           pip install pyinstaller
 
       - name: Costruisci eseguibile
